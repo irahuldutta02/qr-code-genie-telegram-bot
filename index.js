@@ -1,0 +1,59 @@
+const { Telegraf } = require("telegraf");
+const dotenv = require("dotenv");
+const axios = require("axios");
+const bot = new Telegraf(process.env.BOT_TOKEN);
+
+bot.start((ctx) =>
+  ctx.reply("Welcome to the qr code genie bot! Send me any message or link I will return you a qr code of that message or link or send me a qr code I will return you the data of that qr code.")
+);
+
+bot.command("hello", (ctx) => ctx.reply("Hello! ❤️"));
+
+bot.command("clear", async (ctx) => {
+  ctx.reply("Clearing the history...");
+  const chatId = ctx.message.chat.id;
+  const messageId = ctx.message.message_id;
+  for (let i = 1; i < messageId; i++) {
+    try {
+      await ctx.telegram.deleteMessage(chatId, i);
+    } catch (error) {
+      console.error(`Error deleting message with ID ${i}:`, error.description);
+    }
+  }
+});
+
+bot.command("help", (ctx) =>
+  ctx.reply(
+    "Send me any message or link I will return you a qr code of that message or link or send me a qr code I will return you the data of that qr code."
+  )
+);
+
+// to convert data to qr code
+bot.on("text", (ctx) => {
+  ctx.reply("Wait a moment, I am generating the QR code...");
+  ctx.replyWithPhoto({
+    url: `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${ctx.message.text}`,
+  });
+});
+
+
+// to convert qr code to data
+bot.on("photo", async (ctx) => {
+  ctx.reply("Wait a moment, I am processing the QR code...");
+  const photo = ctx.message.photo[0];
+  const photoFile = await ctx.telegram.getFile(photo.file_id);
+  const photoUrl = `https://api.telegram.org/file/bot${process.env.BOT_TOKEN}/${photoFile.file_path}`;
+
+  const response = await axios.get(
+    `https://api.qrserver.com/v1/read-qr-code/?fileurl=${photoUrl}`
+  );
+
+  if (response.data[0].symbol[0].error === null) {
+    await ctx.reply("The QR code contains the following data:");
+    ctx.reply(response.data[0].symbol[0].data);
+  } else {
+    ctx.reply("Make sure you are sending a valid QR code image.");
+  }
+});
+
+bot.launch();

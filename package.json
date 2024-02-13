@@ -1,0 +1,19 @@
+{
+  "name": "telegram-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.3",
+    "jimp": "^0.22.10",
+    "nodemon": "^3.0.3",
+    "qrcode-reader": "^1.0.4",
+    "telegraf": "^4.15.3"
+  }
+}
