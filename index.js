@@ -36,24 +36,6 @@ bot.command("help", (ctx) => {
   ctx.reply("/clear - to clear the chat history");
 });
 
-bot.stop(async (ctx) => {
-  // Perform cleanup tasks or save state here
-  const chatId = ctx.message.chat.id;
-  const messageId = ctx.message.message_id;
-  for (let i = messageId; i > 0; i--) {
-    try {
-      await ctx.telegram.deleteMessage(chatId, i);
-    } catch (error) {
-      break;
-      console.error(`Error deleting message with ID ${i}:`, error.description);
-    }
-  }
-  ctx.reply("Cleared the chat history!");
-  console.log('Bot has been stopped gracefully');
-  return ctx.reply('Bot is stopping gracefully...');
-});
-
-
 // to convert data to qr code
 bot.on("text", (ctx) => {
   ctx.reply("Wait a moment, I am generating the QR code...");
@@ -82,7 +64,3 @@ bot.on("photo", async (ctx) => {
 });
 
 bot.launch();
-
-// Enable graceful stop
-process.once('SIGINT', () => bot.stop('SIGINT'))
-process.once('SIGTERM', () => bot.stop('SIGTERM'))
