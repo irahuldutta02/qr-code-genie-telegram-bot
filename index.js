@@ -4,14 +4,13 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 
 let count = 1;
 
-bot.start((ctx) =>
+bot.start((ctx) => {
   ctx.reply(
-    `Welcome to the qr code genie bot! Send me any message or link I will return you a qr code of that message or link or send me a qr code I will return you the data of that qr code.
-    /help - to get help
-    /clear - to clear the chat history
-    `
-  )
-);
+    "Welcome to the qr code genie bot! Send me any message or link I will return you a qr code of that message or link or send me a qr code I will return you the data of that qr code."
+  );
+  ctx.reply("/help - to get help");
+  ctx.reply("/clear - to clear the chat history");
+});
 
 bot.command("hello", (ctx) => ctx.reply("Hello! ❤️"));
 
@@ -30,11 +29,12 @@ bot.command("clear", async (ctx) => {
   }
 });
 
-bot.command("help", (ctx) =>
+bot.command("help", (ctx) => {
   ctx.reply(
     "Send me any message or link I will return you a qr code of that message or link or send me a qr code I will return you the data of that qr code."
-  )
-);
+  );
+  ctx.reply("/clear - to clear the chat history");
+});
 
 // to convert data to qr code
 bot.on("text", (ctx) => {
