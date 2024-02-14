@@ -5,8 +5,6 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 let count = 1;
 
 bot.start((ctx) => {
-  const chatId = ctx.message.chat.id;
-  ctx.reply("Chat ID : " + chatId);
   ctx.reply(
     "Welcome to the qr code genie bot! Send me any message or link I will return you a qr code of that message or link or send me a qr code I will return you the data of that qr code."
   );
@@ -31,6 +29,7 @@ bot.command("clear", async (ctx) => {
   }
 });
 
+//help command
 bot.command("help", (ctx) => {
   ctx.reply(
     "Send me any message or link I will return you a qr code of that message or link or send me a qr code I will return you the data of that qr code."
@@ -65,12 +64,12 @@ bot.on("photo", async (ctx) => {
   }
 });
 
-bot.telegram.deleteWebhook();
+bot.telegram.deleteWebhook(); // to avoid conflicts with the webhook
 
-const webhookUrl = process.env.WEB_HOOK;
+const webhookUrl = process.env.WEB_HOOK; // the webhook url
 
-bot.telegram.setWebhook(webhookUrl);
+bot.telegram.setWebhook(webhookUrl); // setting the webhook
 
-bot.startWebhook("/", null, process.env.PORT || 3000);
+bot.startWebhook("/", null, process.env.PORT || 3000); // starting the webhook
 
-bot.launch();
+bot.launch(); // starting the bot
