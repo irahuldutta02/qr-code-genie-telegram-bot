@@ -65,4 +65,10 @@ bot.on("photo", async (ctx) => {
   }
 });
 
-bot.launch();
+// bot.launch();
+
+const webhookUrl = process.env.WEB_HOOK;
+
+bot.telegram.setWebhook(webhookUrl);
+
+bot.startWebhook("/secret-path", null, process.env.PORT || 3000);
