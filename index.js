@@ -1,5 +1,6 @@
 const { Telegraf } = require("telegraf");
 const axios = require("axios");
+require("dotenv").config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 let count = 1;
@@ -63,13 +64,5 @@ bot.on("photo", async (ctx) => {
     ctx.reply("Make sure you are sending a valid QR code image.");
   }
 });
-
-bot.telegram.deleteWebhook(); // to avoid conflicts with the webhook
-
-const webhookUrl = process.env.WEB_HOOK; // the webhook url
-
-bot.telegram.setWebhook(webhookUrl); // setting the webhook
-
-bot.startWebhook("/", null, process.env.PORT || 3000); // starting the webhook
 
 bot.launch(); // starting the bot
