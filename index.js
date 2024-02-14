@@ -7,7 +7,7 @@ let count = 1;
 
 bot.start((ctx) => {
   ctx.reply(
-    "Hi there! Welcome to the qr code genie bot! Send me any message or link I will return you a qr code of that message or link or send me a qr code I will return you the data of that qr code."
+    "Local! Welcome to the qr code genie bot! Send me any message or link I will return you a qr code of that message or link or send me a qr code I will return you the data of that qr code."
   );
   ctx.reply("/help - to get help");
   ctx.reply("/clear - to clear the chat history");
