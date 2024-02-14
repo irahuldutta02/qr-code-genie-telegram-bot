@@ -65,6 +65,4 @@ bot.on("photo", async (ctx) => {
   }
 });
 
-process.once("SIGINT", () => bot.stop("SIGINT"));
-process.once("SIGTERM", () => bot.stop("SIGTERM"));
 bot.launch(); // starting the bot
