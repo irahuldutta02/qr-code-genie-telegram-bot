@@ -5,6 +5,8 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 let count = 1;
 
 bot.start((ctx) => {
+  const chatId = ctx.message.chat.id;
+  ctx.reply("Chat ID : "+ chatId);
   ctx.reply(
     "Welcome to the qr code genie bot! Send me any message or link I will return you a qr code of that message or link or send me a qr code I will return you the data of that qr code."
   );
