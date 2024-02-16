@@ -2,7 +2,7 @@
 
 ## Preview
 
-![](https://i.postimg.cc/SxDDgk0Z/output.gif)
+https://github.com/irahuldutta02/qr-code-genie-telegram-bot/assets/78687135/27d5c27e-7f5b-4969-afdd-0e9c936aef10
 
 ## Description
 
