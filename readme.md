@@ -1,7 +1,8 @@
 # QR CODE GENIE TELEGRAM BOT
 
-## Video Preview
+## Preview
 
+![](https://i.postimg.cc/SxDDgk0Z/output.gif)
 
 ## Description
 
